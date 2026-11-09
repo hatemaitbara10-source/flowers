@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flowers For You 🌷</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0a0a0a;overflow:hidden;height:100vh;font-family:Georgia,serif}
+  .message{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    color:white;text-align:center;z-index:10;width:90%;
+    animation:fadeIn 3s ease-in;
+  }
+  .message h1{font-size:32px;color:#ffb6d9;margin-bottom:12px;text-shadow:0 0 20px #ff5c9d}
+  .message p{font-size:17px;line-height:1.6;opacity:.9}
+  .message .small{margin-top:20px;font-size:13px;letter-spacing:3px;color:#ffd60a}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .flower{position:absolute;bottom:-100px;animation:grow 4s ease-out forwards, sway 3s ease-in-out infinite}
+  .stem{width:4px;height:190px;background:linear-gradient(to top,#1a5d1a,#2d8f2d);margin:0 auto;border-radius:2px;box-shadow:0 0 10px #2d8f2d}
+  .rose-petal{width:28px;height:28px;background:radial-gradient(circle,#ff4d6d,#c9184a);border-radius:50% 50% 50% 0;position:absolute;box-shadow:0 0 10px #ff4d6d}
+  .rose-center{width:18px;height:18px;background:#ffd60a;border-radius:50%;position:absolute;box-shadow:0 0 15px #ffd60a}
+  .sun-petal{width:22px;height:38px;background:radial-gradient(circle,#ffd60a,#f4a261);border-radius:50% 50% 0 0;position:absolute;box-shadow:0 0 8px #ffd60a}
+  .sun-center{width:32px;height:32px;background:radial-gradient(circle,#8d5524,#5c3317);border-radius:50%;position:absolute}
+  @keyframes grow{from{bottom:-100px;opacity:0}to{bottom:30px;opacity:1}}
+  @keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+  .stars{position:absolute;width:100%;height:100%;background-image:radial-gradient(2px 2px at 20px 30px, white, transparent),radial-gradient(2px 2px at 40px 70px, white, transparent),radial-gradient(1px 1px at 90px 40px, white, transparent);background-size:150px 150px;animation:twinkle 2s infinite}
+  @keyframes twinkle{0%,100%{opacity:.5}50%{opacity:1}}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="message">
+  <h1>💕</h1>
+  <p>I planted 25 roses and 23 sunflowers for you.<br>
+  Not one of them will ever wilt.<br>
+  .</p>
+ 
+</div>
+
+<script>
+const ROSE_COUNT = 25;
+const SUN_COUNT = 23;
+
+function createFlower(type, x){
+  const f=document.createElement('div');
+  f.className='flower';
+  f.style.left=x+'vw';
+  f.style.animationDelay=Math.random()*3+'s, '+(Math.random()*2)+'s';
+  const stem=document.createElement('div');
+  stem.className='stem';
+  f.appendChild(stem);
+  if(type==='rose'){
+    for(let i=0;i<8;i++){
+      const p=document.createElement('div');
+      p.className='rose-petal';
+      p.style.transform=`rotate(${i*45}deg) translateY(-14px)`;
+      p.style.top='-20px'; p.style.left='-12px';
+      f.appendChild(p);
+    }
+    const c=document.createElement('div');
+    c.className='rose-center'; c.style.top='-14px'; c.style.left='-9px';
+    f.appendChild(c);
+  } else {
+    for(let i=0;i<12;i++){
+      const p=document.createElement('div');
+      p.className='sun-petal';
+      p.style.transform=`rotate(${i*30}deg) translateY(-24px)`;
+      p.style.top='-28px'; p.style.left='-11px';
+      f.appendChild(p);
+    }
+    const c=document.createElement('div');
+    c.className='sun-center'; c.style.top='-16px'; c.style.left='-16px';
+    f.appendChild(c);
+  }
+  document.body.appendChild(f);
+}
+for(let i=0;i<ROSE_COUNT;i++) createFlower('rose', Math.random()*85+5);
+for(let i=0;i<SUN_COUNT;i++) createFlower('sun', Math.random()*85+5);
+</script>
+</body>
+</html>
